@@ -1,14 +1,24 @@
 import sys
+import re
 
 def find_type(value):
-    # COMPLETE ME
-
-    return
+    if value.lower()=="true" or value.lower()=="false":
+        return "boolean"
+    searchstr = re.search( r'[A-Za-z]', value)
+    searchint = re.match( r'[0-9]', value)
+    if(searchstr):
+        return "string"
+    elif(searchint and list(value).count('.')==0):
+        return "int"
+    elif(list(value).count('.')==1):
+       return "float"
+    else:
+        return "string"
 
 def main():
     print('Enter something to identify if it\'s an int, float, string or boolean')
-
-    # COMPLETE ME
+    val=input("val: ")
+    find_type(val)
 
 
 

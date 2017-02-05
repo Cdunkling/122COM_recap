@@ -1,19 +1,41 @@
 import sys
+import string
 
 class Morseifier:
-    # MAKE AS MANY CHANGES TO THE CLASS AS YOU WANT
+    alpha = [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+                "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
+                "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8",
+                "9", "0", " " ];
+    morse = [ ".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+                "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.",
+                "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-",
+                "-.--", "--..", ".----", "..---", "...--", "....-", ".....",
+                "-....", "--...", "---..", "----.", "-----", "/" ];
 
+    translatedict={}
+    def __init__(self):
+        for i in range(0,len(self.alpha)):
+            self.translatedict[self.alpha[i]] = self.morse[i]
+            self.translatedict[self.morse[i]] = self.alpha[i]
+            
     def translate(self,text):
-        ''' A function that takes a string as input and 
-            translates it into morse code before returning it '''
-        # COMPLETE ME
-        return 
+        sentence = list(text)
+        morsesentence=""
+        i=0
+        for letter in sentence:
+            if i==len(sentence)-1:
+                morsesentence+=self.translatedict[letter]
+                return morsesentence
+            morsesentence+=self.translatedict[letter]+' '
+            i+=1
+        return morsesentence
 
     def untranslate(self,morse):
-        ''' A function  that takes a string as input and
-            translates it from morse code before returning it '''
-        # COMPLETE ME
-        return
+        morsesentence = morse.split()
+        sentence=""
+        for letter in morsesentence:
+            sentence+=self.translatedict[letter]
+        return sentence
 
 
 
